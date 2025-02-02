@@ -2,8 +2,8 @@
   "name": "cicd",
   "version": "1.0.0",
   "main": "index.js",
- "scripts": {
-  "test": "npx jest"
+"scripts": {
+  "test": "jest"
 },
 
   "keywords": [],
