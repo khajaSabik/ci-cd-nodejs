@@ -29,22 +29,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    if: github.event_name == 'push'
+    if: github.event_name == 'push'  # Only trigger deploy when there is a push event
     steps:
-      - name: Deploy (Mock Step)
-        run: echo "Deploying application..."
-      - name: Install dependencies
-        run: npm install
-      - name: Set execute permissions for Jest
-        run: chmod +x node_modules/.bin/jest
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Set executable permissions for Jest
+        run: chmod +x node_modules/.bin/jest
 
       - name: Run tests
         run: npm test
 
+      - name: Deploy (Mock Step)
+        run: echo "Deploying application..."
