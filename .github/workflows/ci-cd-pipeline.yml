@@ -33,3 +33,6 @@ jobs:
     steps:
       - name: Deploy (Mock Step)
         run: echo "Deploying application..."
+      - name: Install dependencies
+        run: npm install
+
