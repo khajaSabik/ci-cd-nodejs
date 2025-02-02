@@ -35,4 +35,16 @@ jobs:
         run: echo "Deploying application..."
       - name: Install dependencies
         run: npm install
+      - name: Set execute permissions for Jest
+        run: chmod +x node_modules/.bin/jest
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Run tests
+        run: npm test
 
