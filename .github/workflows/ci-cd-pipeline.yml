@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
 
 jobs:
   build-and-push:
@@ -24,3 +25,6 @@ jobs:
 
       - name: Push Docker Image to Docker Hub
         run: docker push my-dockerhub-username/my-node-app:${{ env.GIT_SHA }}
+
+
+
