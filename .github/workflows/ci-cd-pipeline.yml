@@ -21,10 +21,10 @@ jobs:
         run: echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Build Docker Image with Git SHA
-        run: docker build -t my-dockerhub-username/my-node-app:${{ env.GIT_SHA }} .
+        run: docker build -t "${{ secrets.DOCKER_HUB_USERNAME }}"/my-node-app:${{ env.GIT_SHA }} .
 
       - name: Push Docker Image to Docker Hub
-        run: docker push my-dockerhub-username/my-node-app:${{ env.GIT_SHA }}
+        run: docker push "${{ secrets.DOCKER_HUB_USERNAME }}"/my-node-app:${{ env.GIT_SHA }}
 
 
 
