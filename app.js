@@ -1,5 +1,5 @@
 const express = require("express");
-const sum = require("./sum");
+const sum = require("./src/sum");  // <-- updated path
 
 const app = express();
 
