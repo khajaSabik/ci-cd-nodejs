@@ -9,8 +9,7 @@ on:
 
 jobs:
   build-and-push:
-    runs-on: [self-hosted, linux, ec2]
-
+    runs-on: self-hosted
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
