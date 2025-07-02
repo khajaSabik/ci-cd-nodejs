@@ -1,28 +1,32 @@
 const express = require("express");
-const sum = require("./src/sum");  // <-- updated path
+const path = require("path");
+const sum = require("./src/sum"); // Make sure sum.js is inside 'src' folder
 
 const app = express();
+const PORT = process.env.PORT || 4000;
 
-// Root route
-app.get("/", (req, res) => {
-  res.send("Dhaka world!");
-});
+// Middleware to parse JSON and form data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// New route: /sum?a=2&b=3
-app.get("/sum", (req, res) => {
-  const a = parseInt(req.query.a);
-  const b = parseInt(req.query.b);
+// Serve static files from the 'public' folder
+app.use(express.static(path.join(__dirname, "public")));
 
-  if (isNaN(a) || isNaN(b)) {
+// POST route to calculate sum
+app.post("/sum", (req, res) => {
+  const { a, b } = req.body;
+  const numA = parseInt(a);
+  const numB = parseInt(b);
+
+  if (isNaN(numA) || isNaN(numB)) {
     return res.status(400).json({ error: "Both a and b must be numbers" });
   }
 
-  const result = sum(a, b);
+  const result = sum(numA, numB);
   res.json({ result });
 });
 
-// Start server
-const PORT = process.env.PORT || 4000;
+// Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });

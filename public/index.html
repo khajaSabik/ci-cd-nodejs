@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sum App</title>
+</head>
+<body>
+  <h1>Simple Sum Calculator</h1>
+  <form id="sumForm">
+    <input type="number" id="a" placeholder="Enter number A" required />
+    <input type="number" id="b" placeholder="Enter number B" required />
+    <button type="submit">Calculate</button>
+  </form>
+  <h2 id="result"></h2>
+
+  <script>
+    document.getElementById("sumForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const a = document.getElementById("a").value;
+      const b = document.getElementById("b").value;
+
+      const response = await fetch("/sum", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ a, b }),
+      });
+
+      const data = await response.json();
+      if (data.result !== undefined) {
+        document.getElementById("result").textContent = `Result: ${data.result}`;
+      } else {
+        document.getElementById("result").textContent = `Error: ${data.error}`;
+      }
+    });
+  </script>
+</body>
+</html>
